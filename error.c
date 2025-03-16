@@ -2,13 +2,43 @@
 
 int	duplication(stack *top)
 {
-	stack *current;
-	stack *tmp;
+  stack *current = a;
+  int *values = (int *)malloc(500 * sizeof(int));
+  if (values == NULL) {
+   return 0;
+  }
+  int valueCount = 0;
+  int duplicateFound = 0;
 
-	while(*top)
+  while (current != NULL && duplicateFound == 0)
+{
+   int i = 0;
+   int found = 0;
+
+   while (i < valueCount && found == 0) 
+   {
+    if (values[i] == current->value)
 	{
-	}
-}
+    	 duplicateFound = 1;
+     	found = 1;
+        }
+    i++;
+   }
+
+   if (found == 0) {
+    values[valueCount] = current->value;
+    valueCount++;
+   }
+
+   current = current->next;
+  }
+
+  free(values);
+  if (duplicateFound == 1)
+	return 1;
+ else
+   return 0;
+ }
 
 static int	limits(const char *s, long num)
 {
@@ -27,6 +57,7 @@ static int	sign_dup(const char *str)
 		if(*str == '+' || *str == '-')
 		{
 			if (*(str + 1) == '+' || *(str + 1) == '-' || *(str + 1) == ' ' || *(str + 1) == '\0')
+
                         	return (1);
 		}
 		str++;
