@@ -6,28 +6,69 @@ void	new_node(int value, stack **a)
 	new = (stack *) malloc (sizeof(stack));
 	new->value = value;
 	new->next = *a;
-	a = &new;
+	*a = new;
 	printf("pushed %d\n", new->value);
 }
 
-void      handle(char **arv, stack **a)
+void free_stack(stack **a)
 {
-	char **tmp;
+    stack *temp;
 
-	tmp = ++arv;
-	if(!arv[2])
-	{
-                tmp = ft_split(tmp[0], ' ');
-	}
+    while (*a)
+    {
+        temp = *a;
+        *a = (*a)->next;
+        free(temp);
+    }
+}
 
-        while(*tmp)
+void handle(char **arv, stack **a)
+{
+    char **tmp;
+    int i  = 1;
+    int x;
+
+    while (arv[i])
+    {
+        tmp = ft_split(arv[i], ' ');
+
+        if (!tmp || !tmp[0])
         {
-             if(string(*tmp))
-			exit(((write(1, "Error\n", 6)), 1));
-                new_node(ft_atoi(*tmp), a);
-		*(tmp++);
+	    free_table(tmp);
+            exit((write(1, "Error\n", 6), free_stack(a), 1));
         }
 
+        x = 0;
+        while (tmp[x])
+        {
+            if (string(tmp[x]))
+		exit((write(1, "Error\n", 6), free_table(tmp), free_stack(a), 1));
+
+            new_node(ft_atoi(tmp[x]), a);
+            x++;
+        }
+	free_table(tmp);
+        i++;
+    }
+	if(duplication(a))
+	{
+		exit((write(1, "Error\n", 6),  free_stack(a), 1));
+	}
+}
+
+void free_table(char **table)
+{
+    int i = 0;
+
+    if (!table)
+        return;
+
+    while (table[i])
+    {
+        free(table[i]);
+        i++;
+    }
+    free(table);
 }
 
 int main(int arc, char **arv)
@@ -41,6 +82,7 @@ int main(int arc, char **arv)
 	{
 		handle(arv, &a);
 	}
+	free_stack(&a);
 
 	return (0);
 }

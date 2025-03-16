@@ -17,8 +17,8 @@ typedef struct mystack
 
 char	**ft_split(char const *s, char c);
 char 	*ft_substr(char const *s, unsigned int start, size_t len);
-int	ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 
 int	string(const char *str); //input errors
-
+void	free_table(char **tmp);
 #endif

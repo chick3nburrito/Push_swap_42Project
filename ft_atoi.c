@@ -1,12 +1,15 @@
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int i;
+	long i;
 	int sign;
 
 	i = 0;
 	sign = 1;
+
+	while(*str == ' ' || ((*str == '\t' && *str == '\r')) )
+		str++;
 
 	if(*str == '-' || *str == '+')
 	{

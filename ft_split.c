@@ -12,7 +12,7 @@ static void    all(char **result)
     }
     free(result);
 }
-static void    allocate(char **result, char const *s, char sep)
+static int    allocate(char **result, char const *s, char sep)
 {
     char        **result1;
     char const    *tmp;
@@ -32,13 +32,14 @@ static void    allocate(char **result, char const *s, char sep)
             if (!*result1)
             {
                 all(result);
-                return ;
+                return(1);
             }
             s = tmp;
             result1++;
         }
     }
     *result1 = NULL;
+	return (0);
 }
 
 
@@ -70,10 +71,12 @@ char    **ft_split(char const *s, char c)
 
     if (!s)
         return (NULL);
+
     size = words(s, c);
     result = (char **)malloc(sizeof(char *) * (size + 1));
     if (!result)
         return (NULL);
-    allocate(result, s, c);
+    if(allocate(result, s, c))
+	return (NULL);
     return (result);
 }
