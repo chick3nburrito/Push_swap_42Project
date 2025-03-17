@@ -1,49 +1,82 @@
 #include "push_swap.h"
 
-int	stack_len(stack *top)
+void swap(int *a, int *b)
 {
-	int len;
-	len = 0;
-	while(top != NULL)
-	{
-		len++;
-		top = top->next;
-	}
-	return len;
+    int temp;
+
+    temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
-bool	check_sort(stack *top)
+int partition(int arr[], int low, int high)
 {
-	while(top->next != NULL)
-	{
-		if(top->value > top->next->value)
-			return (false);
-		top = top->next;
-	}
-	return (true);
+    int p;
+    int i;
+    int j;
+
+    p = arr[low];
+    i = low;
+    j = high;
+    while (i < j)
+    {
+        while (arr[i] <= p && i <= high - 1)
+            i++;
+        while (arr[j] > p && j >= low + 1)
+            j--;
+        if (i < j)
+            swap(&arr[i], &arr[j]);
+    }
+    swap(&arr[low], &arr[j]);
+    return j;
 }
 
-void	fill_values(int *values, stack *top)
+void quicksort(int arr[], int high)
 {
-	int i = 0;
-	while(top != NULL)
-	{
-		values[i] = top->value;
-		i++;
-		top = top->next;
-		printf("pushed to table \n");
-	}
+    int low;
+    int pi;
+
+    low = 0;
+    if (low < high)
+    {
+        pi = partition(arr, low, high);
+        if (pi - 1 > low)
+            quicksort(arr + low, pi - 1 - low);
+        if (pi + 1 < high)
+            quicksort(arr + pi + 1, high - (pi + 1));
+    }
 }
 
-void	quick_sort(stack **top)
+void sort(stack **top)
 {
-	if(check_sort(*top))
-		return ;
-	int *values;
-	values = (int *) malloc (sizeof(int) * (stack_len(*top)));
-	if(!values)
-		return ;
-	fill_values(values, *top);
+    int len;
+    int *values;
+    stack *current;
+    int i;
 
+    if (check_sort(*top))
+        return ;
+    len = stack_len(*top);
+    values = (int *)malloc(sizeof(int) * len);
+    if (!values)
+        return ;
+    fill_values(values, *top);
+    quicksort(values, len - 1);
+    i = 0;
+    while (i < len)
+    {
+        printf("%d\n", values[i]);
+        i++;
+    }
+    current = *top;
+    i = 0;
+    while (i < len && current)
+    {
+        current->value = values[i];
+        current = current->next;
+        i++;
+    }
+    assign_ranks(top, values, stack_len(*top));
 
+    free(values);
 }

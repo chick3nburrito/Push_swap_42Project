@@ -100,7 +100,8 @@ int main(int arc, char **arv)
 	if(arc >= 2)
 	{
 		handle(arv, &a);
-		quick_sort(&a);
+		assign_indices(a);
+		sort(&a);
 	}
 	free_stack(&a);
 
