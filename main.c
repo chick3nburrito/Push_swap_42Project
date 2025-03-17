@@ -5,9 +5,28 @@ void	new_node(int value, stack **a)
 	stack *new;
 	new = (stack *) malloc (sizeof(stack));
 	new->value = value;
-	new->next = *a;
-	*a = new;
+	new->next = NULL;
+	node_add_back(new, a);
 	printf("pushed %d\n", new->value);
+
+}
+
+void	node_add_back(stack *new, stack **top)
+{
+	stack	*current;
+	if(top == NULL || new == NULL)
+		return ;
+	if(*top == NULL)
+	{
+		*top = new;
+		return ;
+	}
+	current =  *top;
+	while(current->next != NULL)
+	{
+		current = current->next;
+	}
+	current->next = new;
 }
 
 void free_stack(stack **a)
@@ -50,7 +69,7 @@ void handle(char **arv, stack **a)
 	free_table(tmp);
         i++;
     }
-	if(duplication(a))
+	if(duplication(*a))
 	{
 		exit((write(1, "Error\n", 6),  free_stack(a), 1));
 	}
@@ -81,6 +100,7 @@ int main(int arc, char **arv)
 	if(arc >= 2)
 	{
 		handle(arv, &a);
+		quick_sort(&a);
 	}
 	free_stack(&a);
 

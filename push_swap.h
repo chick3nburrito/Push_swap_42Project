@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <stdbool.h>
 
 typedef struct mystack
 {
@@ -20,5 +21,9 @@ char 	*ft_substr(char const *s, unsigned int start, size_t len);
 long	ft_atoi(const char *str);
 
 int	string(const char *str); //input errors
+int	duplication(stack *top);
 void	free_table(char **tmp);
+void	node_add_back(stack *new, stack **top);
+
+void	quick_sort(stack **top); //sort algo
 #endif
