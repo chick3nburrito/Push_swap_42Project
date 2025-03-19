@@ -13,7 +13,7 @@ typedef struct mystack
 	int index;
 	int rank;
 	struct mystack * next;
-}	stack;
+}	t_stack;
 
 
 char	**ft_split(char const *s, char c);
@@ -25,12 +25,10 @@ int	duplication(stack *top);
 void	free_table(char **tmp);
 void	node_add_back(stack *new, stack **top);
 
-void assign_indices(stack *top);
-void    assign_ranks(stack **top, int *values, int len);
+void	assign_indices(stack **top);
+void    assign_ranks(stack **top);
 void	sort(stack **top); //sort algo
-void    quicksort(int arr[], int high);
 
 int stack_len(stack *top);
-void fill_values(int *values, stack *top);
 bool check_sort(stack *top);
 #endif

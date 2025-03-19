@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-void	new_node(int value, stack **a)
+void	new_node(int value, t_stack **a)
 {
-	stack *new;
-	new = (stack *) malloc (sizeof(stack));
+	t_stack *new;
+	new = (t_stack *) malloc (sizeof(t_stack));
 	new->value = value;
 	new->next = NULL;
 	node_add_back(new, a);
@@ -11,9 +11,9 @@ void	new_node(int value, stack **a)
 
 }
 
-void	node_add_back(stack *new, stack **top)
+void	node_add_back(t_stack *new, t_stack **top)
 {
-	stack	*current;
+	t_stack	*current;
 	if(top == NULL || new == NULL)
 		return ;
 	if(*top == NULL)
@@ -29,9 +29,9 @@ void	node_add_back(stack *new, stack **top)
 	current->next = new;
 }
 
-void free_stack(stack **a)
+void free_stack(t_stack **a)
 {
-    stack *temp;
+    t_stack *temp;
 
     while (*a)
     {
@@ -41,7 +41,7 @@ void free_stack(stack **a)
     }
 }
 
-void handle(char **arv, stack **a)
+void handle(char **arv, t_stack **a)
 {
     char **tmp;
     int i  = 1;
@@ -92,15 +92,14 @@ void free_table(char **table)
 
 int main(int arc, char **arv)
 {
-	stack *a;
-	stack *b;
+	t_stack *a;
+	t_stack *b;
 
 	a = NULL;
 	b = NULL;
 	if(arc >= 2)
 	{
 		handle(arv, &a);
-		assign_indices(a);
 		sort(&a);
 	}
 	free_stack(&a);

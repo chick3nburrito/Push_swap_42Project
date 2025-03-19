@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int stack_len(stack *top)
+int stack_len(t_stack *top)
 {
     int len;
 
@@ -13,7 +13,7 @@ int stack_len(stack *top)
     return len;
 }
 
-bool check_sort(stack *top)
+bool check_sort(t_stack *top)
 {
     while (top && top->next != NULL)
     {
@@ -24,15 +24,55 @@ bool check_sort(stack *top)
     return true;
 }
 
-void fill_values(int *values, stack *top)
+void assign_indices(t_stack **top)
 {
-    int i;
+	t_list *current;
+	int i;
 
-    i = 0;
-    while (top != NULL)
-    {
-        values[i] = top->value;
-        i++;
-        top = top->next;
-    }
+	current = *top;
+	i = 0;
+	while(current)
+	{
+		current->index = i;
+		current  = temp->next;
+		i++;
+	}
+}
+void    assign_ranks(t_stack **top)
+{
+	t_stack *current;
+	t_stack *tmp;
+	int	rank;
+
+	current = *top;
+	while(current)
+	{
+		rank = 1;
+		tmp = *current;
+		while(tmp)
+		{
+			if(current->value > tmp->value)
+				rank++;
+			tmp = tmp->next;
+		}
+		current->rank = rank;
+		current = current->next;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

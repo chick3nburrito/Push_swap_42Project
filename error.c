@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	duplication(stack *top)
+int	duplication(t_stack *top)
 {
 	int		*values;
 	int		valueCount;
