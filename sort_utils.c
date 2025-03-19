@@ -15,6 +15,8 @@ int stack_len(t_stack *top)
 
 bool check_sort(t_stack *top)
 {
+	if(!top)
+		return true;
     while (top && top->next != NULL)
     {
         if (top->value > top->next->value)
@@ -26,7 +28,7 @@ bool check_sort(t_stack *top)
 
 void assign_indices(t_stack **top)
 {
-	t_list *current;
+	t_stack *current;
 	int i;
 
 	current = *top;
@@ -34,7 +36,7 @@ void assign_indices(t_stack **top)
 	while(current)
 	{
 		current->index = i;
-		current  = temp->next;
+		current  = current->next;
 		i++;
 	}
 }
@@ -48,7 +50,7 @@ void    assign_ranks(t_stack **top)
 	while(current)
 	{
 		rank = 1;
-		tmp = *current;
+		tmp = current;
 		while(tmp)
 		{
 			if(current->value > tmp->value)
@@ -60,19 +62,46 @@ void    assign_ranks(t_stack **top)
 	}
 }
 
+t_stack  *smallest(t_stack **stack)
+{
+        t_stack  *ptr;
+        t_stack  *small;
 
+        ptr = NULL;
+        ptr = *stack;
+        small = ptr;
+        while (ptr)
+        {
+                if (ptr->value < small->value)
+                        small = ptr;
+                ptr = ptr->next;
+        }
+        return (small);
+}
 
+void    assign_target(t_stack *b, t_stack *a)
+{
+        t_stack  *the_target;
+        t_stack  *x;
+        long    index;
 
-
-
-
-
-
-
-
-
-
-
-
-
+        while (b)
+        {
+                index = LONG_MAX;
+                x = a;
+                while (x)
+                {
+                        if (b->value < x->value && x->value < index)
+                        {
+                                index = x->value;
+                                the_target = x;
+                        }
+                        x = x->next;
+                }
+                if (index == LONG_MAX)
+                        b->target = smallest(&a);
+                else
+                        b->target = the_target;
+                b = b->next;
+        }
 }

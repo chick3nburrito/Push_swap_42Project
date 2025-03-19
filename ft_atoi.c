@@ -1,5 +1,14 @@
 #include "push_swap.h"
 
+t_stack	*ft_last(t_stack *top)
+{
+	if (top == NULL)
+		return (NULL);
+	while (top->next != NULL)
+		top = top->next;
+	return (top);
+}
+
 long	ft_atoi(const char *str)
 {
 	long i;
