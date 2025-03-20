@@ -50,7 +50,7 @@ void    assign_ranks(t_stack **top)
 	while(current)
 	{
 		rank = 1;
-		tmp = current;
+		tmp = *top;
 		while(tmp)
 		{
 			if(current->value > tmp->value)

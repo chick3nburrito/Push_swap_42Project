@@ -7,7 +7,7 @@ void	new_node(int value, t_stack **a)
 	new->value = value;
 	new->next = NULL;
 	node_add_back(new, a);
-	printf("pushed %d\n", new->value);
+//	printf("pushed %d\n", new->value);
 
 }
 

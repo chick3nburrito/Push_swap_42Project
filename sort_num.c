@@ -28,7 +28,7 @@ void    sort_five(t_stack **a, t_stack **b)
     while (stack_len(*a) > 3)
     {
         if ((*a)->rank == 1 || (*a)->rank == 2)
-            pb(a, b);
+            pb(b, a);
         else
             ra(a);
     }

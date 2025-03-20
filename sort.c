@@ -19,19 +19,9 @@ void sort(t_stack **top, t_stack **b)
 	if(!check_sort(*top))
 	{
 		assign_ranks(top);
-
-		if(stack_len(*top) == 2)
-			sa(top);
+		if(stack_len(*top) == 5)
+			sort_five(top, b);
 		else if(stack_len(*top) == 3)
 			sort_three(top);
-		else if(stack_len(*top) == 5)
-			sort_five(top, b);
 	}
-//	while(!check_sort(*top))
-//	{
-		assign_indices(top);
-		assign_indices(b);
-		assign_ranks(b);
-		assign_target(*b, *top);
-//	}
 }
