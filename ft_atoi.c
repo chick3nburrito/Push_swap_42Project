@@ -1,14 +1,5 @@
 #include "push_swap.h"
 
-t_stack	*ft_last(t_stack *top)
-{
-	if (top == NULL)
-		return (NULL);
-	while (top->next != NULL)
-		top = top->next;
-	return (top);
-}
-
 long	ft_atoi(const char *str)
 {
 	long i;
@@ -34,4 +25,28 @@ long	ft_atoi(const char *str)
 		str++;
 	}
 	return (i * sign);
+}
+
+void free_table(char **table)
+{
+    int i = 0;
+
+    if (!table)
+        return;
+
+    while (table[i])
+    {
+        free(table[i]);
+        i++;
+    }
+    free(table);
+}
+
+t_stack	*ft_last(t_stack *top)
+{
+	if (top == NULL)
+		return (NULL);
+	while (top->next != NULL)
+		top = top->next;
+	return (top);
 }

@@ -31,4 +31,3 @@ void    rrr(t_stack **stack_2, t_stack **stack_1)
         reverse_rotate(stack_2);
         write(1, "rrr\n", 4);
 }
-

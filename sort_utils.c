@@ -26,20 +26,6 @@ bool check_sort(t_stack *top)
     return true;
 }
 
-void assign_indices(t_stack **top)
-{
-	t_stack *current;
-	int i;
-
-	current = *top;
-	i = 0;
-	while(current)
-	{
-		current->index = i;
-		current  = current->next;
-		i++;
-	}
-}
 void    assign_ranks(t_stack **top)
 {
 	t_stack *current;

@@ -58,3 +58,27 @@ void    reverse_rotate(t_stack **stack)
         new_first->next = first;
         *stack = new_first;
 }
+
+void    node_add_back(t_stack *new, t_stack **top)
+{
+        t_stack *current;
+        if(top == NULL || new == NULL)
+                return ;
+        if(*top == NULL)
+        {
+                *top = new;
+                return ;
+        }
+        current =  *top;
+        while(current->next != NULL)
+        {
+                current = current->next;
+        }
+        current->next = new;
+}
+
+void	rrb(t_stack	**stack)
+{
+	reverse_rotate(stack);
+	write(1, "rrb\n", 4);
+}
