@@ -1,45 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bamdjar <bamdjar@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/21 22:52:12 by bamdjar           #+#    #+#             */
+/*   Updated: 2025/03/21 22:56:24 by bamdjar          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	duplication(t_stack *top)
 {
-	int		*values;
-	int		valueCount;
-	int		duplicateFound;
-	int		i;
-	int		found;
+	int	*values;
+	int	valuecount;
+	int	i;
 
 	values = (int *)malloc(500 * sizeof(int));
 	if (values == NULL)
-	{
 		return (0);
-	}
-	valueCount = 0;
-	duplicateFound = 0;
-	while (top != NULL && duplicateFound == 0)
+	valuecount = 0;
+	while (top != NULL)
 	{
 		i = 0;
-		found = 0;
-		while (i < valueCount && found == 0)
+		while (i < valuecount)
 		{
-			if (values[i] == top->value)
-			{
-				duplicateFound = 1;
-				found = 1;
-			}
-			i++;
+			if (values[i++] == top->value)
+				return (free(values), 1);
 		}
-		if (found == 0)
-		{
-			values[valueCount] = top->value;
-			valueCount++;
-		}
+		values[valuecount++] = top->value;
 		top = top->next;
 	}
 	free(values);
-	if (duplicateFound == 1)
-		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 static int	limits(const char *s, long num)

@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bamdjar <bamdjar@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/21 22:52:28 by bamdjar           #+#    #+#             */
+/*   Updated: 2025/03/21 22:53:22 by bamdjar          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
-size_t  ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-        size_t  i;
+	size_t	i;
 
-        i = 0;
-        while (str[i])
-                i++;
-        return (i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t len)
