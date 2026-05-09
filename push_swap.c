@@ -1,60 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamdjar <bamdjar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 22:52:17 by bamdjar           #+#    #+#             */
+/*   Created: 2025/02/21 22:52:45 by bamdjar           #+#    #+#             */
 /*   Updated: 2025/03/25 11:54:34 by bamdjar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atoi(const char *str)
+void	pa(t_stack **stack_2, t_stack **stack_1)
 {
-	long	i;
-	int		sign;
-
-	i = 0;
-	sign = 1;
-	while (*str == ' ' || ((*str == '\t' && *str == '\r')))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		i = i * 10 + (*str - '0');
-		str++;
-	}
-	return (i * sign);
+	push_in_stack(stack_2, stack_1);
+	write(1, "pa\n", 3);
 }
 
-void	free_table(char **table)
+void	pb(t_stack **stack_2, t_stack **stack_1)
 {
-	int	i;
-
-	i = 0;
-	if (!table)
-		return ;
-	while (table[i])
-	{
-		free(table[i]);
-		i++;
-	}
-	free(table);
+	push_in_stack(stack_2, stack_1);
+	write(1, "pb\n", 3);
 }
 
-t_stack	*ft_last(t_stack *top)
+void	sa(t_stack **stack_a)
 {
-	if (top == NULL)
-		return (NULL);
-	while (top->next != NULL)
-		top = top->next;
-	return (top);
+	swap(stack_a);
+	write(1, "sa\n", 3);
+}
+
+void	sb(t_stack **stack_b)
+{
+	swap(stack_b);
+	write(1, "sb\n", 3);
+}
+
+void	ss(t_stack **stack_b, t_stack **stack_a)
+{
+	swap(stack_a);
+	swap(stack_b);
+	write(1, "ss\n", 3);
 }

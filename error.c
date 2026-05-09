@@ -1,44 +1,41 @@
-#include  "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bamdjar <bamdjar@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 22:52:12 by bamdjar           #+#    #+#             */
+/*   Updated: 2025/03/25 11:54:32 by bamdjar          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	duplication(stack *top)
+#include "push_swap.h"
+
+int	duplication(t_stack *top)
 {
-  stack *current = a;
-  int *values = (int *)malloc(500 * sizeof(int));
-  if (values == NULL) {
-   return 0;
-  }
-  int valueCount = 0;
-  int duplicateFound = 0;
+	int	*values;
+	int	valuecount;
+	int	i;
 
-  while (current != NULL && duplicateFound == 0)
-{
-   int i = 0;
-   int found = 0;
-
-   while (i < valueCount && found == 0) 
-   {
-    if (values[i] == current->value)
+	values = (int *)malloc(500 * sizeof(int));
+	if (values == NULL)
+		return (1);
+	valuecount = 0;
+	while (top != NULL)
 	{
-    	 duplicateFound = 1;
-     	found = 1;
-        }
-    i++;
-   }
-
-   if (found == 0) {
-    values[valueCount] = current->value;
-    valueCount++;
-   }
-
-   current = current->next;
-  }
-
-  free(values);
-  if (duplicateFound == 1)
-	return 1;
- else
-   return 0;
- }
+		i = 0;
+		while (i < valuecount)
+		{
+			if (values[i++] == top->value)
+				return (free(values), 1);
+		}
+		values[valuecount++] = top->value;
+		top = top->next;
+	}
+	free(values);
+	return (0);
+}
 
 static int	limits(const char *s, long num)
 {
@@ -52,30 +49,28 @@ static int	limits(const char *s, long num)
 
 static int	sign_dup(const char *str)
 {
-	while(*str)
+	while (*str)
 	{
-		if(*str == '+' || *str == '-')
+		if (*str == '+' || *str == '-')
 		{
-			if (*(str + 1) == '+' || *(str + 1) == '-' || *(str + 1) == ' ' || *(str + 1) == '\0')
-
-                        	return (1);
+			if (*(str + 1) == '+' || *(str + 1) == '-' || *(str + 1) == ' '
+				|| *(str + 1) == '\0')
+				return (1);
 		}
 		str++;
 	}
-	return 0;
+	return (0);
 }
 
-int 	string(const char *str)
+int	string(const char *str)
 {
-	if(!str || *str == '\0' || (sign_dup(str)) || limits(str, ft_atoi(str)))
+	if (!str || *str == '\0' || (sign_dup(str)) || limits(str, ft_atoi(str)))
 		return (1);
-
-	while(*str)
+	while (*str)
 	{
-		if(!((*str >= '0' && *str <= '9' ) || (*str == '-') || (*str == '+')))
+		if (!((*str >= '0' && *str <= '9') || (*str == '-') || (*str == '+')))
 			return (1);
 		str++;
 	}
-
 	return (0);
 }
